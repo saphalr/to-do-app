@@ -1,0 +1,24 @@
+# docker-compose.yml
+
+services:
+  app:
+    build: .
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/app
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - HOST=0.0.0.0
+      - PORT=9000
+    command: uvicorn app.main:app --host 0.0.0.0 --port 9000
+
+  docs:
+    image: squidfunk/mkdocs-material
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/docs
+    working_dir: /docs
+    command: serve -a 0.0.0.0:8000

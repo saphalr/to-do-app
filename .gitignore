@@ -1,7 +1,13 @@
-__py__cache/
-venv/
+__pycache__/
+
+tests/__pycache__/
+venv
 .env
 
 .vscode/
 
 .pytest_cache/
+
+.ruff_cache
+
+site

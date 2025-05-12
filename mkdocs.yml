@@ -1,0 +1,13 @@
+site_name: FastAPI Todo App
+theme:
+  name: 'material'
+
+nav:
+  - Home: index.md
+  - API Reference:
+      - Todo API: api.md
+  - Configuration: config.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
