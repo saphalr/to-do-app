@@ -1,16 +1,15 @@
 from fastapi import FastAPI
-from app.core.config import settings
+from app.routes import router
+from app.database import engine, Base
 
 app = FastAPI()
 
 # app.include_router(todo.router, prefix='/api/todo')
 
 
-@app.get("/")
-def read_root():
-    return {
-        "debug": settings.debug,
-        "environment": settings.environment,
-        "port": settings.port,
-        "host": settings.host,
-    }
+@app.on_event("startup")
+def on_satrtup():
+    Base.metadata.create_all(engine)
+
+
+app.include_router(router)

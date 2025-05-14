@@ -14,6 +14,21 @@ services:
       - PORT=9000
     command: uvicorn app.main:app --host 0.0.0.0 --port 9000
 
+  db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
   docs:
     image: squidfunk/mkdocs-material
     ports:
@@ -22,3 +37,6 @@ services:
       - .:/docs
     working_dir: /docs
     command: serve -a 0.0.0.0:8000
+
+volumes:
+    pgdata:
