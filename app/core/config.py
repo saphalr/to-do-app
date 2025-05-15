@@ -4,10 +4,9 @@ from pydantic import ConfigDict
 
 class Settings(BaseSettings):
     debug: bool = True
-    environment: str = "development"
-    port: int = 8000
-    host: str = "127.0.0.1"
-    secret_key: str
+    environment: str
+    port: int
+    host: str
     db_user: str
     db_password: str
     db_name: str

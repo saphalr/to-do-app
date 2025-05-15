@@ -1,14 +1,22 @@
-# Todo API
+# API Documentation
 
-The Todo API allows users to interact with the to-do list.
+This document describes the API endpoints for the Todo application.
 
-## Endpoints
+## Base URL
 
-### `GET /get_todos/`
+All API endpoints are relative to: `http://localhost:8000`
 
-Returns the list of all to-dos.
+## API Endpoints
 
-#### Example Response
+### Get All Todos
+
+```http
+GET /get_todos/
+```
+
+Retrieves a list of all todo items.
+
+**Response Format:**
 
 ```json
 [
@@ -22,36 +30,34 @@ Returns the list of all to-dos.
 ]
 ```
 
-### `POST /add_todo/`
+### Create Todo
 
-Creates a new to-do item.
+```http
+POST /add_todo/
+```
 
-#### Request Body
+Creates a new todo item.
+
+**Request Body:**
 
 ```json
 {
-  "title": "Buy groceries",
-  "description": "Milk, eggs, and bread"
+  "title": "Complete API documentation",
+  "description": "Write detailed API docs for the Todo app"
 }
 ```
 
-#### Example Response
+**Response:** The created todo item.
 
-```json
-{
-  "id": 1,
-  "title": "Buy groceries",
-  "description": "Milk, eggs, and bread",
-  "completed": false,
-  "created_at": "2023-05-17T10:00:00"
-}
+### Update Todo
+
+```http
+PUT /update_todo/{todo_id}
 ```
 
-### `PUT /update_todo/{todo_id}`
+Updates an existing todo item.
 
-Updates an existing to-do item.
-
-#### Request Body
+**Request Body:**
 
 ```json
 {
@@ -61,23 +67,17 @@ Updates an existing to-do item.
 }
 ```
 
-#### Example Response
+**Response:** The updated todo item.
 
-```json
-{
-  "id": 1,
-  "title": "Updated title",
-  "description": "Updated description",
-  "completed": true,
-  "created_at": "2023-05-17T10:00:00"
-}
+### Delete Todo
+
+```http
+DELETE /delete_todo/{todo_id}
 ```
 
-### `DELETE /delete_todo/{todo_id}`
+Deletes a todo item.
 
-Deletes a to-do item.
-
-#### Example Response
+**Response:**
 
 ```json
 {

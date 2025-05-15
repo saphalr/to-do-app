@@ -1,18 +1,6 @@
 # docker-compose.yml
 
 services:
-  app:
-    build: .
-    ports:
-      - "9000:9000"
-    volumes:
-      - .:/app
-    environment:
-      - ENVIRONMENT=development
-      - DEBUG=True
-      - HOST=0.0.0.0
-      - PORT=9000
-    command: uvicorn app.main:app --host 0.0.0.0 --port 9000
 
   db:
     image: postgres:15
@@ -28,15 +16,32 @@ services:
     ports:
       - "5432:5432"
 
+  app:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DEBUG=${DEBUG}
+      - HOST=${HOST}
+      - PORT=${PORT}
+    command: uvicorn app.main:app --host ${HOST} --port ${PORT}
 
   docs:
     image: squidfunk/mkdocs-material
     ports:
-      - "8000:8000"
+      - "9000:9000"
     volumes:
       - .:/docs
     working_dir: /docs
-    command: serve -a 0.0.0.0:8000
+    command: serve -a 0.0.0.0:9000
 
 volumes:
     pgdata:
