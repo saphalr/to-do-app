@@ -4,11 +4,9 @@ from app.database import engine, Base
 
 app = FastAPI()
 
-# app.include_router(todo.router, prefix='/api/todo')
-
 
 @app.on_event("startup")
-def on_satrtup():
+def on_startup():
     Base.metadata.create_all(engine)
 
 

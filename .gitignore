@@ -11,3 +11,5 @@ venv
 .ruff_cache
 
 site
+
+test.db
