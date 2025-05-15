@@ -40,7 +40,7 @@ name: FastAPI Todo App CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main, development]
   pull_request:
     branches: [main]
 
