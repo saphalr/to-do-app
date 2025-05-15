@@ -1,6 +1,6 @@
 # FastAPI Todo App
 
-A simple, modern RESTful API for managing to-do items built with FastAPI and SQLAlchemy.
+A simple RESTful API for managing to-do items built with FastAPI.
 
 ## Features
 
